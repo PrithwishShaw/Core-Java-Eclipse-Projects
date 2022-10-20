@@ -54,10 +54,7 @@ public class StudentDaoImpl implements StudentDao{
 		return status;
 	}
 
-	public boolean updateStudent(int id, Student s) {
-		
-		return false;
-	}
+
 
 	public Student findStudent(int id) {
 		
@@ -71,5 +68,41 @@ public class StudentDaoImpl implements StudentDao{
 		
 		return sFind;
 	}
+
+	@Override
+	public boolean updateStudent(int id) {
+		// TODO Auto-generated method stub
+		
+		boolean status= false;
+		Student sFind= null;
+		//finding the student
+		for(Student s:sList) {
+			if(s.getId()==id)
+				sFind=s;
+
+		}
+		if(sFind!=null)
+		{
+			System.out.println("Enter the Student NAME: ");
+			sFind.setName(sc.next());
+			System.out.println("Enter the Student MARKS: ");
+			sFind.setMarks(sc.nextDouble());
+			status= true;
+		}
+		else
+			status=false;
+	
+		return status;
+	}
+
+	@Override
+	public void displayAll() {
+		// TODO Auto-generated method stub
+		for(Student s:sList) {
+			System.out.println(s);
+		}
+		
+	}
+	
 	
 }

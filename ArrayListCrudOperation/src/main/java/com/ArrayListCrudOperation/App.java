@@ -26,7 +26,7 @@ public class App
 		//creating object of impl
 		StudentDao school= new StudentDaoImpl();
 		
-		//declaring variable choice
+		try{//declaring variable choice
 		int ch=0;
 		
 		do {
@@ -46,6 +46,15 @@ public class App
 				else
 					System.out.println("Student not found..........");
 				break;
+			case 3:
+				System.out.println("Enter the ID to be updated: ");
+				id=sc.nextInt();
+				flag= school.updateStudent(id);
+				if (flag)
+					System.out.println("Student updated.........");
+				else
+					System.out.println("Student not found..........");
+				break;
 			case 4:
 				Student ss= null;
 				System.out.println("Enter the ID to be searched: ");
@@ -56,6 +65,8 @@ public class App
 				else
 					System.out.println("Student ID: "+ss.getId()+" Name: "+ss.getName()+" Marks: "+ss.getMarks());
 				break;
+			case 5:
+				school.displayAll();
 			case 6:
 				System.exit(0);
 			default:
@@ -68,5 +79,8 @@ public class App
 		//end of while
 		
 		sc.close();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 }
