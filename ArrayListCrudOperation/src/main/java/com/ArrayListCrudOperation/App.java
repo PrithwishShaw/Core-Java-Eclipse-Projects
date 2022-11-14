@@ -2,12 +2,17 @@ package com.ArrayListCrudOperation;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import com.ArrayListCrudOperations.dao.StudentDao;
 import com.ArrayListCrudOperations.daoimpl.StudentDaoImpl;
 import com.ArrayListCrudOperations.model.Student;
 
 public class App 
 {
+	
+	static JFrame f1;
 	
 	public static void menu() {
 		System.out.println("MENU:");
@@ -21,6 +26,7 @@ public class App
 	}
 	public static void main( String[] args ) {
 		
+		f1 = new JFrame();
 		//creating scanner object
 		Scanner sc= new Scanner(System.in);
 		//creating object of impl
@@ -35,7 +41,8 @@ public class App
 			switch(ch) {
 			case 1:
 				school.addStudent();
-				System.out.println("Student inserted..........");
+				JOptionPane.showMessageDialog(null, "Student inserted......");
+				//System.out.println("Student inserted..........");
 				break;
 			case 2:
 				System.out.println("Enter the ID to be deleted: ");
@@ -47,14 +54,32 @@ public class App
 					System.out.println("Student not found..........");
 				break;
 			case 3:
-				System.out.println("Enter the ID to be updated: ");
-				id=sc.nextInt();
-				flag= school.updateStudent(id);
-				if (flag)
-					System.out.println("Student updated.........");
-				else
-					System.out.println("Student not found..........");
+				id=(Integer.parseInt(JOptionPane.showInputDialog("Enter the ID:")));
+				//System.out.println("Enter the ID to be updated: ");
+				//id=sc.nextInt();
+				int choice=0;
+				System.out.println("1. Update Name\n"+"2. Updating Marks: ");
+				choice= sc.nextInt();
+				switch(choice)
+				{
+				case 1:
+					flag= school.updateStudent(id,choice);
+					if (flag)
+						System.out.println("Student updated.........");
+					else
+						System.out.println("Student not fsound..........");
+					break;
+				case 2:	
+					flag= school.updateStudent(id,choice);
+					if (flag)
+						System.out.println("Student updated.........");
+					else
+						System.out.println("Student not found..........");
 				break;
+				default:
+					System.out.println("No such property........");
+					break;
+				}
 			case 4:
 				Student ss= null;
 				System.out.println("Enter the ID to be searched: ");
@@ -74,6 +99,7 @@ public class App
 
 			}
 		}
+	
 		while(ch!=6);
 		
 		//end of while
@@ -82,5 +108,7 @@ public class App
 		}catch(Exception e) {
 			System.out.println(e);
 		}
+	
+		}
 	}
-}
+

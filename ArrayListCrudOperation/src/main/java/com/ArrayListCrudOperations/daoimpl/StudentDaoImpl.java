@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import com.ArrayListCrudOperations.dao.StudentDao;
 import com.ArrayListCrudOperations.model.Student;
 
@@ -14,18 +16,25 @@ public class StudentDaoImpl implements StudentDao{
 	
 	//creating scanner class
 	Scanner sc= new Scanner(System.in);
+	
+	
 
 	public void addStudent() {
 		
+		
+		
 		//creating student object
 		Student ss= new Student();
-		//input the details of students 
-		System.out.println("Enter the Student ID: ");
-		ss.setId(sc.nextInt());
-		System.out.println("Enter the Student NAME: ");
-		ss.setName(sc.next());
-		System.out.println("Enter the Student MARKS: ");
-		ss.setMarks(sc.nextDouble());
+		//input the details of students
+		ss.setId(Integer.parseInt(JOptionPane.showInputDialog("Enter the ID:")));
+		//System.out.println("Enter the Student ID: ");
+		//ss.setId(sc.nextInt());
+		ss.setName(JOptionPane.showInputDialog("Enter the Name:"));
+		//System.out.println("Enter the Student NAME: ");
+		//ss.setName(sc.next());
+		ss.setMarks(Float.parseFloat(JOptionPane.showInputDialog("Enter the Marks:")));
+		//System.out.println("Enter the Student MARKS: ");
+		//ss.setMarks(sc.nextDouble());
 		
 		//adding the student into the collection
 		sList.add(ss);
@@ -39,7 +48,7 @@ public class StudentDaoImpl implements StudentDao{
 		
 		//finding the student
 		for(Student s: sList) {
-			if(s.getId()==id);
+			if(s.getId()==id)
 			sDel=s;
 		}
 
@@ -70,7 +79,7 @@ public class StudentDaoImpl implements StudentDao{
 	}
 
 	@Override
-	public boolean updateStudent(int id) {
+	public boolean updateStudent(int id,int choice) {
 		// TODO Auto-generated method stub
 		
 		boolean status= false;
@@ -83,11 +92,24 @@ public class StudentDaoImpl implements StudentDao{
 		}
 		if(sFind!=null)
 		{
-			System.out.println("Enter the Student NAME: ");
-			sFind.setName(sc.next());
-			System.out.println("Enter the Student MARKS: ");
-			sFind.setMarks(sc.nextDouble());
+			if(choice==1)
+			{
+			sFind.setName(JOptionPane.showInputDialog("Enter the Student Name:"));
+			//System.out.println("Enter the Student NAME: ");
+			//sFind.setName(sc.next());
+			JOptionPane.showMessageDialog(null, "Name updated......");
+			//System.out.println("Name updated.....");
 			status= true;
+			}
+			else if(choice== 2)
+			{
+				sFind.setMarks(Float.parseFloat(JOptionPane.showInputDialog("Enter the Student Marks:")));
+				//System.out.println("Enter the Student MARKS: ");
+				//sFind.setMarks(sc.nextDouble());
+				JOptionPane.showMessageDialog(null, "Marks updated......");
+				//System.out.println("Marks updated.....");
+				status=true;
+			}
 		}
 		else
 			status=false;
